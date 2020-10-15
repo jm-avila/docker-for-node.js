@@ -1,1 +1,0 @@
-Official Docker Tutorial app

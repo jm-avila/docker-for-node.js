@@ -67,3 +67,80 @@ There are three types of volumes:
   ```
   docker run -v /path/on/host:/path/in/container ...
   ```
+
+## Common Commands
+
+**General:**
+
+- docker --help
+  - _Check the latest available commands on your Docker installation or on a specific command info of it's usage._
+- docker version
+  - _Provides docker version information._
+- docker login
+  - _Log in to a Docker registry._
+- docker system prune
+  - _Delete all unused containers, unused networks, and dangling images._
+
+**Container:**
+
+Use docker container my_command
+
+- create
+  - Create a container from an image.
+- run
+  - Create a new container and start it.
+  - -i
+    - _short for --interactive. Keep STDIN open even if unattached._
+  - -t
+    - _short for --tty. Allocates a pseudo terminal that connects your terminal with the container’s STDIN and STDOUT._
+  - -it
+    - _By specifying both -i and -t you can interact with the container through your terminal shell._
+  - -p
+    - _short for --port. maps the container ports to your machine ports._
+  - -rm
+    - _Automatically delete the container when it stops running._
+- start
+  - Start an existing container.
+- stop
+  - Gracefully stop running container.
+- kill
+  - Stop main process in container abruptly.
+- restart
+  - Stop and start a container.
+- attach
+  - Attach your local i/o stream to a running container.
+- exec
+  - Run a command in a active container.
+- ls
+  - List running containers.
+- ps
+  - Lists various properties of containers.
+- inspect
+  - See lots of info about a container.
+- logs
+  - Print logs.
+- rm
+  - Delete a stopped container.
+
+**Images:**
+
+Use docker image my_command
+
+- build
+  - _Build an image._
+- push
+  - _Push an image to a remote registry._
+- pull
+  - _Pull an image from remote registry._
+- ls
+  - _List images._
+- history
+  - _See intermediate image info._
+- inspect
+  - _See info about an image, including the layers._
+- rm
+  - _Delete an image, can also be done with docker rmi._
+
+## Build Images
+
+Dockerfile

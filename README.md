@@ -145,6 +145,18 @@ Use docker image my_command
 - rm
   - _Delete an image, can also be done with docker rmi._
 
+**Network:**
+Use docker network my_command
+
+- connect
+  - Connect a container to a network.
+- create
+  - Create a network.
+  - -d
+    - short for --driver. Driver to manage the Network (default "bridge").
+- disconnect
+  - Disconnect a container from a network.
+
 ## Dockerfile
 
 A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using docker build users can create an automated build that executes several command-line instructions in succession.
@@ -168,3 +180,19 @@ RUN echo 'we are running some # of cool things'
 - CMD
 
 Note: Instructions order is very important because docker caches the layers and only rebuilds them from the layer that changed. Therefore it's best to first copy and install the dependencies and afterwards copy the source files, since the sources files change more often, making new builds will be faster as dependencies won't be rebuild if they haven't changed.
+
+## Networks
+
+One of the reasons Docker containers and services are so powerful is that you can connect them together, or connect them to non-Docker workloads.
+
+Docker’s networking subsystem is pluggable, using drivers. Several drivers exist by default, and provide core networking functionality:
+
+- bridge
+
+  - The default network driver. Bridge networks are usually used when your applications run in standalone containers that need to communicate.
+  - User-defined bridge networks are best when you need multiple containers to communicate on the same Docker host.
+
+- host
+
+  - For standalone containers, remove network isolation between the container and the Docker host, and use the host’s networking directly.
+  - Host networks are best when the network stack should not be isolated from the Docker host, but you want other aspects of the container to be isolated.

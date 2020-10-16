@@ -68,7 +68,7 @@ There are three types of volumes:
   docker run -v /path/on/host:/path/in/container ...
   ```
 
-## Common Commands
+### Common Commands
 
 **General:**
 
@@ -97,6 +97,10 @@ Use docker container my_command
     - _By specifying both -i and -t you can interact with the container through your terminal shell._
   - -p
     - _short for --port. maps the container ports to your machine ports._
+  - -e
+    - _short for -env. Set environment variables._
+  - v
+    - _short for --volume. Bind mount a volume._
   - -rm
     - _Automatically delete the container when it stops running._
 - start
@@ -141,6 +145,26 @@ Use docker image my_command
 - rm
   - _Delete an image, can also be done with docker rmi._
 
-## Build Images
+## Dockerfile
 
-Dockerfile
+A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. Using docker build users can create an automated build that executes several command-line instructions in succession.
+
+**Format**
+INSTRUCTION arguments
+
+e.g.
+
+```
+RUN echo 'we are running some # of cool things'
+```
+
+### Common Instructions
+
+- FROM
+- RUN
+- WORKDIR
+- COPY
+- LABEL
+- CMD
+
+Note: Instructions order is very important because docker caches the layers and only rebuilds them from the layer that changed. Therefore it's best to first copy and install the dependencies and afterwards copy the source files, since the sources files change more often, making new builds will be faster as dependencies won't be rebuild if they haven't changed.

@@ -68,9 +68,37 @@ There are three types of volumes:
   docker run -v /path/on/host:/path/in/container ...
   ```
 
+## Container Network
+
+One of the reasons Docker containers and services are so powerful is that you can connect them together, or connect them to non-Docker workloads.
+
+Docker’s networking subsystem is pluggable, using drivers. Several drivers exist by default, and provide core networking functionality:
+
+- bridge
+
+  - The default network driver. Bridge networks are usually used when your applications run in standalone containers that need to communicate.
+  - User-defined bridge networks are best when you need multiple containers to communicate on the same Docker host.
+
+- host
+
+  - For standalone containers, remove network isolation between the container and the Docker host, and use the host’s networking directly.
+  - Host networks are best when the network stack should not be isolated from the Docker host, but you want other aspects of the container to be isolated.
+
 ### Common Commands
 
+**Essential Management Commands:**
+
+- Usage: docker command COMMAND
+- Commands
+  - container
+  - image
+  - volume
+  - network
+  - system
+
 **General:**
+
+Commands:
 
 - docker --help
   - _Check the latest available commands on your Docker installation or on a specific command info of it's usage._
@@ -81,14 +109,15 @@ There are three types of volumes:
 - docker system prune
   - _Delete all unused containers, unused networks, and dangling images._
 
-**Container:**
+**container**
+Usage: docker container COMMAND
 
-Use docker container my_command
+Commands:
 
 - create
-  - Create a container from an image.
+  - _Create a container from an image._
 - run
-  - Create a new container and start it.
+  - _Create a new container and start it._
   - -i
     - _short for --interactive. Keep STDIN open even if unattached._
   - -t
@@ -104,31 +133,32 @@ Use docker container my_command
   - -rm
     - _Automatically delete the container when it stops running._
 - start
-  - Start an existing container.
+  - _Start an existing container._
 - stop
-  - Gracefully stop running container.
+  - _Gracefully stop running container._
 - kill
-  - Stop main process in container abruptly.
+  - _Stop main process in container abruptly._
 - restart
-  - Stop and start a container.
+  - _Stop and start a container._
 - attach
-  - Attach your local i/o stream to a running container.
+  - _Attach your local i/o stream to a running container._
 - exec
-  - Run a command in a active container.
+  - _Run a command in a active container._
 - ls
-  - List running containers.
+  - _List running containers._
 - ps
-  - Lists various properties of containers.
+  - _Lists various properties of containers._
 - inspect
-  - See lots of info about a container.
+  - _See lots of info about a container._
 - logs
-  - Print logs.
+  - _Print logs._
 - rm
-  - Delete a stopped container.
+  - _Delete a stopped container._
 
-**Images:**
+**image**
+Usage: docker image COMMAND
 
-Use docker image my_command
+Commands:
 
 - build
   - _Build an image._
@@ -145,17 +175,49 @@ Use docker image my_command
 - rm
   - _Delete an image, can also be done with docker rmi._
 
-**Network:**
-Use docker network my_command
+**volume**
+Usage: docker volume COMMAND
+
+Commands:
+
+- create
+  - _Create a volume._
+- inspect
+  - _Display detailed information on one or more volumes._
+- ls
+  - _List volumes._
+- prune
+  - _Remove all unused local volumes._
+- rm
+  - _Remove one or more volumes._
+
+**network**
+Usage: docker network COMMAND
+
+Commands:
 
 - connect
-  - Connect a container to a network.
+  - _Connect a container to a network._
 - create
-  - Create a network.
+  - _Create a network._
   - -d
-    - short for --driver. Driver to manage the Network (default "bridge").
+    - _short for --driver. Driver to manage the Network (default "bridge")._
 - disconnect
-  - Disconnect a container from a network.
+  - _Disconnect a container from a network._
+
+**system**
+Usage: docker system COMMAND
+
+Commands:
+
+- df
+  - _Show docker disk usage._
+- events
+  - _Get real time events from the server._
+- info
+  _Display system-wide information._
+- prune
+  - _Remove unused data._
 
 ## Dockerfile
 
@@ -170,32 +232,41 @@ e.g.
 RUN echo 'we are running some # of cool things'
 ```
 
-### Common Instructions
+### Instructions
+
+Instructions can be given in lowercase or uppercase letters. But to differentiate instructions and arguments, instructions are in uppercase.
+
+```
+# Comment
+INSTRUCTION arguments
+```
+
+**Common Instructions**
 
 - FROM
-- RUN
+  - Is used to specify the image name, if it is not available locally it will be downloaded from docker hub registry.
 - WORKDIR
+  - Is used to set the working directory.
+- ADD
+  - Is used to copy files, directories and remote URL files to the destination within the filesystem of the Docker Images.
 - COPY
+  - Is used to copy files, directories and remote URL files to the destination within the filesystem of the Docker Images.
 - LABEL
+  - Is used to specify metadata informations to an image in key-value pairs.
+- ENV
+  -Is used to set environment variables with key and value. The variables will be set during the image build and are available after the container is launched.
+- EXPOSE
+  - Is used to inform about the network ports that the container listens on runtime.
+- VOLUME
+  - Is used to create or mount a volume to the docker container from the docker host filesystem.
+- RUN
+  - Is used to executes any commands on top of the current image.
+- ENTRYPOINT
+  - Is used to configure and run a container as an executable.
 - CMD
+  - Is used to set a command to be executed when running a container. There must be only one CMD in a Dockerfile. If more than one CMD is listed, only the last CMD takes effect.
 
 Note: Instructions order is very important because docker caches the layers and only rebuilds them from the layer that changed. Therefore it's best to first copy and install the dependencies and afterwards copy the source files, since the sources files change more often, making new builds will be faster as dependencies won't be rebuild if they haven't changed.
-
-## Networks
-
-One of the reasons Docker containers and services are so powerful is that you can connect them together, or connect them to non-Docker workloads.
-
-Docker’s networking subsystem is pluggable, using drivers. Several drivers exist by default, and provide core networking functionality:
-
-- bridge
-
-  - The default network driver. Bridge networks are usually used when your applications run in standalone containers that need to communicate.
-  - User-defined bridge networks are best when you need multiple containers to communicate on the same Docker host.
-
-- host
-
-  - For standalone containers, remove network isolation between the container and the Docker host, and use the host’s networking directly.
-  - Host networks are best when the network stack should not be isolated from the Docker host, but you want other aspects of the container to be isolated.
 
 ## [.dockerignore file](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
 

@@ -304,3 +304,42 @@ This helps to avoid unnecessarily sending large or sensitive files and directori
       *
       !Dockerfile
     ```
+
+## Docker Compose
+
+Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
+
+Compose works in all environments: production, staging, development, testing, as well as CI workflows.
+
+Using Compose is basically a three-step process:
+
+1. Define your app’s environment with a Dockerfile so it can be reproduced anywhere.
+
+2. Define the services that make up your app in docker-compose.yml so they can be run together in an isolated environment.
+
+3. Run docker-compose up and Compose starts and runs your entire app.
+
+## docker-compose command
+
+Define and run multi-container applications with Docker.
+
+Usage:
+docker-compose [-f <arg>...] [options] [--] [COMMAND] [ARGS...]
+docker-compose -h|--help
+
+Commands:
+
+- build
+  - _Build or rebuild services._
+- create
+  - _Create services._
+- up
+  - _Create and start containers._
+- down
+  - _Stop and remove containers, networks._
+- restart
+  - _Restart services._
+- exec
+  - _Execute a command in a running container._
+- rm
+  - _Remove stopped containers._

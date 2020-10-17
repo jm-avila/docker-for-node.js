@@ -196,3 +196,40 @@ Docker’s networking subsystem is pluggable, using drivers. Several drivers exi
 
   - For standalone containers, remove network isolation between the container and the Docker host, and use the host’s networking directly.
   - Host networks are best when the network stack should not be isolated from the Docker host, but you want other aspects of the container to be isolated.
+
+## [.dockerignore file](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
+
+To use a file in the build context, the Dockerfile refers to the file specified in an instruction, for example, a COPY instruction. To increase the build’s performance, exclude files and directories by adding a .dockerignore file to the context directory.
+
+This helps to avoid unnecessarily sending large or sensitive files and directories to the daemon and potentially adding them to images using ADD or COPY.
+
+**Useful patterns**
+
+- comment in dockerfile
+  - ```
+    # comment
+    ```
+- ignore git files
+  - ```
+    .git/
+    .gitignore
+    ```
+- ignore contents of a directory but include the directory
+  - ```
+    directoryName/*
+    ```
+- recursively ignore all files of a specific type
+  - ```
+    **/*.extension
+    ```
+- include a specific file of the ignored type
+  - ```
+    **/*.extension
+    !filename.extension
+    ```
+- the dockerfile works as a blacklist, ignoring all pattern matches but it can be inverted to work as a whitelist ignoring all files that don't match a pattern.
+  - on line 1
+    ```
+      *
+      !Dockerfile
+    ```

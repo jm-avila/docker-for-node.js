@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+  os:
+    build: .
+    image: docker-test
+    stdin_open: true # docker run -i
+    tty: true # docker run -t

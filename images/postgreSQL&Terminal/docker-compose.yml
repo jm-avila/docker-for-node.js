@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  db:
+    container_name: postgresSQL_db
+    image: postgres:12.2
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    restart: always
+    env_file:
+      - .pg-env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+    ports:
+      - "5432:5432"
+
+volumes:
+  db-data:

@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  redis-service:
+    container_name: redis-service
+    image: redis
+    volumes: 
+      - ./data:/data
+    ports:
+      - 6379:6379
